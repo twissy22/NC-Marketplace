@@ -1,22 +1,19 @@
-import logo from './logo.svg';
+import Header from './header'
+import Search from './search'
+import Items from './items.js'
 import './App.css';
+import React from 'react';
 
 function App() {
+  const [search, setsearch] = React.useState("");
+  // const [user, setUser] = React.useState({username: 'Paul-R', avatar_url: 'https://images.prismic.io/northcoders/5ffa1ae0-0e83-47aa-a5f2-d4b6ef24af5a_Paul+R.jpg', kudos: 0});
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+<Header />
+<Search setsearch={setsearch}/>
+<Items search={search}/>
+
       </header>
     </div>
   );
