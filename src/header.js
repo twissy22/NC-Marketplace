@@ -9,7 +9,7 @@ const Header = (props) => {
         .then((res) => res.json())
         .then((data) => {
          setUsers(data)
-         console.log(data)
+        //  console.log(data)
         });
     }, [props.users]);
 

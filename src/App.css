@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.photo {
+  height: 14em;
+  border: black;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.listing {
+  width: 40em;
+  display: flex;
+}
