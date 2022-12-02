@@ -1,15 +1,20 @@
 import React from 'react';
+import { createContext,useState, useEffect} from 'react';
+import axios from 'axios'
+export const UserContext = createContext();
 
 export default function Categories({setCategory}) {
+const [input, setInput] = useState("")
+const categories = axios.create({
+  baseURL: 'https://silly-top-coat-foal.cyclic.app/api',
+})
+useEffect(() => {
+  categories.get('/categories').then((res)=>
+  setCategory(res.data.categories)
+  )
+}, [input])
 
-const [input, setInput] = React.useState("")
-
-  function handleChange(e){
-    console.log(e.target.value)
-    setInput(e.target.value);
-  }
-
-    return (
+    return ( 
         // <div className='form-container'>
         //     <form className='form' onSubmit={handleSubmit}>
         //         <input type="text" placeholder='search for an item' className='search-field' onChange={handleChange} value={input}/>
@@ -20,13 +25,13 @@ const [input, setInput] = React.useState("")
 <div>
 
 
-<select value={input} onChange={handleChange}>
+<select value={input}>
 
-  <option value="household">Household</option>
+  <option value="Household">household</option>
 
-  <option value="electronics">Electronics</option>
+  <option value="Electronics">electronics</option>
 
-  <option value="clothing">Clothing</option>
+  <option value="Clothing">clothing</option>
 
 </select>
 

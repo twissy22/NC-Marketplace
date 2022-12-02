@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import Categories from './categories.js'
+import axios from 'axios';
 
 const Items = () => {
   const [items, setItems] = useState([]);
+  const [category,setCategory] = useState("")
   useEffect(() => {
     fetch(`https://silly-top-coat-foal.cyclic.app/api/Items`)
       .then((response) => response.json())
@@ -9,10 +12,12 @@ const Items = () => {
         console.log(data);
         setItems(data.items);
       });
-  }, []);
+  }, [category]);
 
   return (
+  
     <main>
+      <Categories setCategory={setCategory}/>
       <ul>
         {items
           ? items.map((item) => {
