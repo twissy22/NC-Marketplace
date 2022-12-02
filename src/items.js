@@ -5,14 +5,35 @@ import axios from 'axios';
 const Items = () => {
   const [items, setItems] = useState([]);
   const [category,setCategory] = useState("")
-  useEffect(() => {
-    fetch(`https://silly-top-coat-foal.cyclic.app/api/Items`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setItems(data.items);
-      });
-  }, [category]);
+
+//   useEffect(() => {
+//     category ? 
+//     fetch(`https://silly-top-coat-foal.cyclic.app/api/Items`)
+//       .then((response) => response.json())
+//       .then((data) => {
+//         setItems(data.items);
+//     });
+// }, [category]);
+
+const itemss = axios.create({
+  baseURL : "https://silly-top-coat-foal.cyclic.app/api",
+});
+useEffect(() => {
+  let path = "/Items"
+  if (category) { path += `?category_name=${category}`}
+  itemss.get(path).then((res) => setItems(res.data.items))
+}, [category]);
+
+
+// } else if (category ) {
+//     useEffect(() => {
+//         )
+//           .then((response) => response.json())
+//           .then((data) => {
+//             setItems(data.items);
+//         });
+//     }, [category]);
+// }
 
   return (
   
@@ -41,4 +62,5 @@ const Items = () => {
     </main>
   );
 };
+
 export default Items;
