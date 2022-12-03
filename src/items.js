@@ -4,7 +4,7 @@ import axios from 'axios';
 import {UserContext} from './user'
 
 
-const Items = () => {
+const Items = ({search}) => {
   const user = useContext(UserContext)
   console.log(user.user.username, "HERE")
   const [items, setItems] = useState([]);
@@ -16,10 +16,11 @@ const itemss = axios.create({
 useEffect(() => {
   let path = "/Items"
   if (category) { path += `?category_name=${category}`}
+  if (search){path += `?search=${search}`}
   itemss.get(path).then((res) => 
   setItems(res.data.items))
 
-}, [category]);
+}, [category,search]);
 
 const handleSubmit= (e)=>{
   let path = `/users/${user.user.username}/orders`

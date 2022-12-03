@@ -4,7 +4,7 @@ const Item = ({ search }) => {
   const [items, setItems] = useState([]);
   useEffect(() => {
     if (search) {
-      fetch(`https://silly-top-coat-foal.cyclic.app/api/Items/${search}`)
+      fetch(`https://silly-top-coat-foal.cyclic.app/api/Items?${search}`)
         .then((response) => response.json())
         .then((data) => {
           console.log(data.item);
