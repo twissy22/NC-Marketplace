@@ -1,26 +1,23 @@
 import Header from './header'
-import Search from './search'
+import Orders from './order'
 import Item from './item.js'
+import {UserContext} from './user'
+import Nav from './nav'
 import './App.css';
-import React from 'react';
+import React, {useContext} from 'react';
 import Items from './items.js'
+import {Link, useParams, Routes, Route} from 'react-router-dom'
 
 function App() {
-  const [search, setsearch] = React.useState("");
-
-
-  // const [user, setUser] = React.useState({username: 'Paul-R', avatar_url: 'https://images.prismic.io/northcoders/5ffa1ae0-0e83-47aa-a5f2-d4b6ef24af5a_Paul+R.jpg', kudos: 0});
+  const userValue = useContext(UserContext)
   return (
     <div className="App">
-      <header className="App-header">
+      <Nav />
+      <Routes>
+  <Route path="/" element={<Header />}/>
+  <Route path="/myUserpage" element={<Orders />}/>
+</Routes>
 
-<Header />
-<Search setsearch={setsearch}/>
-
-{search  === '' ? <Items /> : <Item search={search}/>
-}
-
-      </header>
     </div>
   );
 }

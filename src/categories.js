@@ -1,7 +1,6 @@
 import React from "react";
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
-export const UserContext = createContext();
 
 export default function Categories({ setCategory }) {
   const [categories, setCategories] = useState([]);
@@ -22,7 +21,7 @@ export default function Categories({ setCategory }) {
   return (
     <div>
       <select value={input} onChange={handleChange}>
-        <option value= "All Categories">All Categories</option>
+        <option value= "Select Category">All Categories</option>
         {categories.map((category) => {
           return <option value={category.category_name}>{category.category_name}</option>;
         })}

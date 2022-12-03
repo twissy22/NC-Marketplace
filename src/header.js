@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
+import Search from './search'
+import Items from './items.js'
+import Item from './item.js'
 
 const Header = (props) => {
+  const [search, setsearch] = React.useState("");
     const [users, setUsers] = React.useState({});
      useEffect(() => {
         fetch(
@@ -9,7 +13,7 @@ const Header = (props) => {
         .then((res) => res.json())
         .then((data) => {
          setUsers(data)
-        //  console.log(data)
+         console.log(data)
         });
     }, [props.users]);
 
@@ -17,6 +21,10 @@ const Header = (props) => {
     return (
       <header className="Header">
         <h1>NCbay</h1>
+        <Search setsearch={setsearch}/>
+
+{search  === '' ? <Items /> : <Item search={search}/>
+} 
 
       </header>
     );

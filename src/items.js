@@ -1,19 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext} from "react";
 import Categories from './categories.js'
 import axios from 'axios';
+import {UserContext} from './user'
+
 
 const Items = () => {
+  const user = useContext(UserContext)
+  console.log(user.user.username, "HERE")
   const [items, setItems] = useState([]);
   const [category,setCategory] = useState("")
-
-//   useEffect(() => {
-//     category ? 
-//     fetch(`https://silly-top-coat-foal.cyclic.app/api/Items`)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         setItems(data.items);
-//     });
-// }, [category]);
 
 const itemss = axios.create({
   baseURL : "https://silly-top-coat-foal.cyclic.app/api",
@@ -21,19 +16,20 @@ const itemss = axios.create({
 useEffect(() => {
   let path = "/Items"
   if (category) { path += `?category_name=${category}`}
-  itemss.get(path).then((res) => setItems(res.data.items))
+  itemss.get(path).then((res) => 
+  setItems(res.data.items))
+
 }, [category]);
 
-
-// } else if (category ) {
-//     useEffect(() => {
-//         )
-//           .then((response) => response.json())
-//           .then((data) => {
-//             setItems(data.items);
-//         });
-//     }, [category]);
-// }
+const handleSubmit= (e)=>{
+  let path = `/users/${user.user.username}/orders`
+  itemss.post(path, {
+    "item_id": +e
+  })
+  .then((response) => {
+    console.log(response.data);
+  });
+}
 
   return (
   
@@ -51,7 +47,7 @@ useEffect(() => {
                       <h2> {item.price} </h2>
                       <h3> {item.description} </h3>
                       <button>Add To Cart</button>
-                      <button>Order Item</button>
+                      <button onClick={e =>handleSubmit(e.target.value)} value={item.item_id}>Order Item</button>
                     </div>
                   </section>
                 </li>
